@@ -5,7 +5,7 @@ function renderTable(){
    let grandTotal= 0; 
    const table= document.getElementById("expenseTable");
    table.innerHTML= "";
-
+   
    expense.forEach((item,index) => {
     grandTotal += item.total; //calculate total
     const row = document.createElement("tr");
