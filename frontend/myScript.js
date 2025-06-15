@@ -4,6 +4,11 @@
 // [{"name": "item1", "quantity": 2, "unitPrice": 10.0, "total": 20.0}, {"name": "item2", "quantity": 3, "unitPrice": 5.0, "total": 15.0}]
 let expense =[];
 
+document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('h2');
+    header.classList.add('fade-in');
+});
+
 function renderTable(){
    let grandTotal= 0; 
    const table= document.getElementById("expenseTable");

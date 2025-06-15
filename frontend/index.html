@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>金满园</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>金满园账单输入表</h2> 
+    <h2>金满园账单输入表</h2>
+    <div class="container">
     <table>
         <thead>
             <tr>
@@ -25,10 +27,11 @@
 <button onclick="addRow()">➕ 新增</button>
 <br>
 <input type="file" name="file" id="imageUpload" accept="image/*">
-<button id ="imageUpload", onclick="process_img()">图片识别</button>
+<button id="imageUpload" onclick="process_img()">图片识别</button>
 <div id="status"></div>
-<script src="myScript.js"></script>
-<p id="totalDisplay">总计: $0.00</p>
+<p id="totalDisplay">总计: ¥0.00</p>
+    </div>
+<script src="myScript.js" defer></script>
 
 </body>
 </html>
