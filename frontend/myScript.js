@@ -5,7 +5,7 @@
 let expense =[];
 
 document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('h2');
+    const header = document.querySelector('h1');
     header.classList.add('fade-in');
 });
 
@@ -35,21 +35,20 @@ function renderTable(){
             onchange="updateItem(${index}, 'total', this.value)">
         </td>
         <td>
-        <button onclick="removeItem(${index})">🗑️ 删除</button>
+        <button onclick="removeItem(${index})">🗑️ Remove</button>
         </td>
             `;
 
         table.appendChild(row)
    });
-   document.getElementById("totalDisplay").textContent = `总计: ¥${grandTotal.toFixed(2)}`;
-   document.getElementById("totalDisplay").style.color = "red";
+   document.getElementById("totalDisplay").textContent = `Total: ¥${grandTotal.toFixed(2)}`;
 }
 
 function updateItem(index, key, value) {
     if (key === "quantity" || key === "unitPrice" || key ==='total') {
         value = parseFloat(value);
         if (isNaN(value) || value < 0) {
-            alert(`重新输入${key}`);
+            alert(`Enter valid ${key}`);
             return;
         }
     }
@@ -75,18 +74,18 @@ function addRow() {
 async function process_img() {
     const fileInput = document.getElementById("imageUpload");
     const file = fileInput.files[0];
-    document.getElementById("status").textContent = "正在处理...";
+    document.getElementById("status").textContent = "Processing...";
     fileInput.disabled = true;
-    document.getElementById("imageUpload").disabled = true;
+    document.getElementById("uploadBtn").disabled = true;
     
     if (fileInput.files.length === 0) {
-        alert("请上传图片！");
+        alert("Please upload an image!");
         fileInput.disabled = false;
         document.getElementById("status").textContent="";
         return;
     }
     if (!file){
-        alert("图片only！");
+        alert("Images only!");
         return
     }
     const formData = new FormData();
@@ -111,11 +110,15 @@ async function process_img() {
             total: item.total
         });
     }
-    document.getElementById("status").textContent = "Done！";
+    document.getElementById("status").textContent = "Done!";
+    fileInput.disabled = false;
+    document.getElementById("uploadBtn").disabled = false;
     renderTable();
 
     } catch (error) {
         console.error('Error:', error);
-        document.getElementById("status").textContent = "云端down！";
+        document.getElementById("status").textContent = "Server error!";
+        fileInput.disabled = false;
+        document.getElementById("uploadBtn").disabled = false;
     }   
 }
