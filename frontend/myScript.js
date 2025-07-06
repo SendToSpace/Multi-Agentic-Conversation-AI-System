@@ -81,6 +81,7 @@ async function process_img() {
     if (fileInput.files.length === 0) {
         alert("Please upload an image!");
         fileInput.disabled = false;
+        document.getElementById("uploadBtn").disabled = false;
         document.getElementById("status").textContent="";
         return;
     }

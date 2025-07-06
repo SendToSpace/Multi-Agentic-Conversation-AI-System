@@ -4,7 +4,13 @@ from flask import Flask, render_template, request, jsonify
 import os
 from docai_utils import extract_text_from_document
 
+import sqlite3
 
+DATABASE = "C:/Users/Jie/Desktop/Recipe/database/receipts.db"
+
+
+
+#TODO: RESOLVE BACKEND AND FRONTEND DOMAINS MIGHT BE DIFFERENT
 #only for local testing
 from flask_cors import CORS
 #remove this for production
@@ -16,9 +22,16 @@ FRONTEND_DIR = os.path.abspath(os.path.join(BASE_DIR, '..','frontend'))
 
 app= Flask(__name__, template_folder=FRONTEND_DIR)
 
+#NOTE: THIS IS ONLY FOR TESTING, IT IS NOT SECURE
 #remove this for production right now is making sure cross origin requests work for testing
 CORS(app, origins=["http://127.0.0.1:5500"])
 #remove this for production
+
+def get_db_connection():
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row  # This allows us to access columns by name
+    return conn
+
 
 @app.route('/extract_text_from_document', methods=['POST'])
 def extract_text():
